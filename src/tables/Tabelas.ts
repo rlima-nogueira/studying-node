@@ -12,6 +12,8 @@ class Tabela {
                 cliente VARCHAR(50) NOT NULL, 
                 pet VARCHAR(20),
                 servico VARCHAR(20) NOT NULL, 
+                data datetime NOT NULL,
+                dataCriacao datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 status VARCHAR(20) NOT NULL,
                 observacoes TEXT, 
                 PRIMARY KEY(id)
