@@ -1,22 +1,21 @@
+import moment from 'moment';
+import { Response } from 'express';
 import Atendimento from '../interfaces/Atendimento'
 import conexao from '../config/db';
-import { format, toDate } from 'date-fns';
 
 
 class AtendimentoModel {
     
-    public adiciona(atendimento: Atendimento) {
-        debugger
-        const dataConvertida = format(new Date(atendimento.data), "MM/dd/yyyy'T'HH:mm:ss.SSSxxx");
-
-        atendimento.data = toDate(new Date(dataConvertida));
+    public adiciona(atendimento: Atendimento, resp: Response) {
+        atendimento.data = moment(atendimento.data, 'DD/MM/YYYY').format('YYYY-MM-DD');
 
         const sql = `INSERT INTO Atendimentos SET ?`;
+
         conexao.query(sql, atendimento, (erro, retorno) => {
             if (erro) {
-                return console.log(atendimento);
+                return resp.status(500).json(erro);
             }
-            return console.log(retorno);
+            return resp.status(201).json(retorno);
         })
     }
 

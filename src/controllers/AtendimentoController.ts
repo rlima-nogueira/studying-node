@@ -1,4 +1,5 @@
 import {Response, Request} from 'express';
+import IAtendimento from '../interfaces/Atendimento';
 import AtendimentoModel from '../models/AtendimentoModel';
 
 class Atendimento {
@@ -8,10 +9,8 @@ class Atendimento {
         return resp.send('Subi a API');
     }
 
-    public async create(req: Request, resp: Response): Promise<Response> {
-        const atendimento = req.body;
-        AtendimentoModel.adiciona(atendimento);
-        return resp.send(req.body);
+    public async create(atendimento: IAtendimento, resp: Response): Promise<void> {
+        return AtendimentoModel.adiciona(atendimento, resp);
     }
 }
 

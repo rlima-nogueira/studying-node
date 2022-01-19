@@ -3,18 +3,19 @@ import conexao from '../config/db';
 class Tabela {
 
     public init(): void {
-        this.criarAtendimentos();
+        this.criarTabelaAtendimentos();
     }
 
-    private criarAtendimentos(): void {
+    private criarTabelaAtendimentos(): void {
+
         const sql = `CREATE TABLE IF NOT EXISTS Atendimentos (
                 id INT NOT NULL AUTO_INCREMENT, 
                 cliente VARCHAR(50) NOT NULL, 
                 pet VARCHAR(20),
                 servico VARCHAR(20) NOT NULL, 
-                data datetime NOT NULL,
+                data date NOT NULL,
                 dataCriacao datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                status VARCHAR(20) NOT NULL,
+                status VARCHAR(50) NOT NULL,
                 observacoes TEXT, 
                 PRIMARY KEY(id)
             )`;

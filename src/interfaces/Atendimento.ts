@@ -3,8 +3,8 @@ export default interface IAtendimento {
     cliente: string;
     pet?: string;
     servico: string;
-    data?: Date;
-    dataCriacao: Date;
+    data?: string;
+    dataCriacao: string;
     status: string;
     observacoes?: string;
 }
