@@ -13,6 +13,9 @@ class AtendimentoModel {
 
         conexao.query(sql, atendimento, (erro, retorno) => {
             if (erro) {
+                if (erro.errno == 1364) {
+                    return resp.status(400).json(erro);
+                }
                 return resp.status(500).json(erro);
             }
             return resp.status(201).json(retorno);
