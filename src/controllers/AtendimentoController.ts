@@ -3,6 +3,9 @@ import IAtendimento from '../interfaces/Atendimento';
 import AtendimentoModel from '../models/AtendimentoModel';
 
 class Atendimento {
+    public async delete(id: number, resp: Response): Promise<void> {
+        return AtendimentoModel.deletarAtendimento(id, resp);
+    }
     public async alter(id: number, valores: any, res: Response): Promise<Response> {
         return AtendimentoModel.atualizarAtendimento(id, valores, res);
     }

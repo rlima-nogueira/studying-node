@@ -6,6 +6,18 @@ import IAtendimento from '../interfaces/Atendimento';
 
 
 class AtendimentoModel {
+    public deletarAtendimento(id: number, resp: Response): void {
+        const sql = `DELETE FROM Atendimentos WHERE id=${id}`;
+
+        conexao.query(sql, (erro) => {
+            if (erro) {
+                return resp.status(400).json(erro);
+            }
+
+          return resp.status(200).send('Registro excluído com sucesso!');
+        })
+    }
+
     public atualizarAtendimento(id: number, valores: IAtendimento, resp: Response): Response {
         const sql = `UPDATE Atendimentos SET ? WHERE id=?`;
 

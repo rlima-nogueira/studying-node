@@ -26,7 +26,12 @@ routes.put('/atendimentos/:id', (req: Request, res: Response) => {
     const valores = req.body;
 
     AtendimentoController.alter(id, valores, res);
+});
 
+routes.delete('/atendimentos/:id', (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+
+    AtendimentoController.delete(id, res);
 });
 
 export default routes;
