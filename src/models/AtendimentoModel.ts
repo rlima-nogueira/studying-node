@@ -2,9 +2,25 @@ import moment from 'moment';
 import { Response } from 'express';
 import Atendimento from '../interfaces/Atendimento'
 import conexao from '../config/db';
+import IAtendimento from '../interfaces/Atendimento';
 
 
 class AtendimentoModel {
+    public findById(id: number, resp: Response): void {
+        const sql = `SELECT * FROM Atendimentos WHERE id=${id}`;
+
+        conexao.query(sql, (erro, retorno) => {
+            if (erro) {
+                resp.status(400).json(erro);
+            }
+
+            if (retorno.length > 0) {
+                resp.status(200).json(retorno);
+            } else {
+                resp.status(200).send('Não há resultados para esta busca.')
+            }
+        });
+    }
     
     public adiciona(atendimento: Atendimento, resp: Response): Response {
         atendimento.data = moment(atendimento.data, 'DD/MM/YYYY').format('YYYY-MM-DD');
