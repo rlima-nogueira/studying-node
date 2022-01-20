@@ -9,6 +9,10 @@ class AtendimentoModel {
     public adiciona(atendimento: Atendimento, resp: Response) {
         atendimento.data = moment(atendimento.data, 'DD/MM/YYYY').format('YYYY-MM-DD');
 
+        if (!this.isDataValida(atendimento.data)){
+            return resp.status(400).send('Data inválida. Insira uma data maior ou igual a hoje.');
+        }
+
         const sql = `INSERT INTO Atendimentos SET ?`;
 
         conexao.query(sql, atendimento, (erro, retorno) => {
@@ -20,6 +24,13 @@ class AtendimentoModel {
             }
             return resp.status(201).json(retorno);
         })
+    }
+
+
+    private isDataValida(dataAtendimento: string): boolean {
+        const hoje = moment(new Date()).format('YYYY-MM-DD');
+        
+        return moment(dataAtendimento).isSameOrAfter(hoje);
     }
 
 }
