@@ -1,0 +1,80 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Agenda PET", 
+        "description": "API construída a partir do curso de Node da plataforma Alura",
+        "version": "1.0.0", 
+        "contact": {
+            "name": "Rafaela Lima Nogueira", 
+            "email": "rlimanogueira@outlook.com.br",
+            "url": "https://github.com/rlima-nogueira"
+        }
+    },
+    "servers": [
+        {
+          "url": "http://localhost:3333/atendimentos", 
+          "description": "Local server"
+        }
+    ],
+    "tags": [
+        {
+          "name": "Agendamentos PET - CRUD operations"
+        }
+    ],
+    "components": {
+        "schemas": {
+          "Atendimentos": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "ID gerado na criação do registro de atendimento", 
+                    "example": "1"
+                },
+                "cliente": {
+                    "type": "string",
+                    "description": "Nome do cliente que está com o PET",
+                    "example": "José da Silva"
+                },
+                "pet": {
+                    "type": "string",
+                    "description": "Nome do PET",
+                    "example": "Jake"
+                },
+                "servico": {
+                    "type": "string",
+                    "description": "Tipo de serviço realizado",
+                    "example": "Banho e tosa"
+                }, 
+                "data": {
+                    "type": "string",
+                    "description": "Data em que o serviço será realizado",
+                    "example": "20/01/2022"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Status do serviço que será realizado",
+                    "example": "Aguardando"
+                },
+                "observacoes": {
+                    "type": "string",
+                    "description": "Observações sobre o atendimento",
+                    "example": "Pet muito agitado."
+                }
+            }
+            
+          }
+        }
+    },
+    "get": {
+        "tags": ["Agendamentos PET - CRUD operations"],
+        "description": "Buscar todos os agendamentos",
+        "operationId": "index",
+        "parameters": {},
+        "responses": {
+            "200": {
+                "description": "Todos os agendamentos cadastrados"
+            }
+        }
+    }
+}

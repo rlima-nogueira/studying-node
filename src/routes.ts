@@ -1,4 +1,6 @@
 import { Router } from 'express'; 
+import swaggerui from 'swagger-ui-express';     
+import swaggerDocument from '../docs/swagger.json';
 import {Response, Request} from 'express';
 
 import AtendimentoController from './controllers/AtendimentoController';
@@ -33,5 +35,9 @@ routes.delete('/atendimentos/:id', (req: Request, res: Response) => {
 
     AtendimentoController.delete(id, res);
 });
+
+
+routes.use('/api-docs', swaggerui.serve);
+routes.get('/api-docs', swaggerui.setup(swaggerDocument));
 
 export default routes;
