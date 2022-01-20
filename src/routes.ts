@@ -21,4 +21,12 @@ routes.post('/atendimentos', (req: Request, res: Response) => {
     AtendimentoController.create(atendimento, res);
 });
 
+routes.put('/atendimentos/:id', (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    const valores = req.body;
+
+    AtendimentoController.alter(id, valores, res);
+
+});
+
 export default routes;

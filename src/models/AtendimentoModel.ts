@@ -6,6 +6,25 @@ import IAtendimento from '../interfaces/Atendimento';
 
 
 class AtendimentoModel {
+    public atualizarAtendimento(id: number, valores: IAtendimento, resp: Response): Response {
+        const sql = `UPDATE Atendimentos SET ? WHERE id=?`;
+
+        valores.data = moment(valores.data, 'DD/MM/YYYY').format('YYYY-MM-DD');
+
+        if (!this.isDataValida(valores.data)){
+            return resp.status(400).send('Data inválida. Insira uma data maior ou igual a hoje.');
+        }
+
+
+        conexao.query(sql, [valores, id], (erro, retorno) => {
+            if (erro) {
+                resp.status(400).json(erro);
+            }
+
+          resp.status(200).json(retorno);
+        });
+    }
+
     public findById(id: number, resp: Response): void {
         const sql = `SELECT * FROM Atendimentos WHERE id=${id}`;
 
