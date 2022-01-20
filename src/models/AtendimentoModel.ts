@@ -1,4 +1,4 @@
-import moment from 'moment';
+import DateUtils from '../utils/DateUtils';
 import { Response } from 'express';
 import Atendimento from '../interfaces/Atendimento'
 import conexao from '../config/db';
@@ -9,9 +9,9 @@ class AtendimentoModel {
     public atualizarAtendimento(id: number, valores: IAtendimento, resp: Response): Response {
         const sql = `UPDATE Atendimentos SET ? WHERE id=?`;
 
-        valores.data = moment(valores.data, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        valores.data = DateUtils.formatarData(valores.data);
 
-        if (!this.isDataValida(valores.data)){
+        if (!DateUtils.isDataValida(valores.data)){
             return resp.status(400).send('Data inválida. Insira uma data maior ou igual a hoje.');
         }
 
@@ -42,9 +42,9 @@ class AtendimentoModel {
     }
     
     public adiciona(atendimento: Atendimento, resp: Response): Response {
-        atendimento.data = moment(atendimento.data, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        atendimento.data = DateUtils.formatarData(atendimento.data);
 
-        if (!this.isDataValida(atendimento.data)){
+        if (!DateUtils.isDataValida(atendimento.data)){
             return resp.status(400).send('Data inválida. Insira uma data maior ou igual a hoje.');
         }
 
@@ -73,11 +73,8 @@ class AtendimentoModel {
         });
     }
 
-    private isDataValida(dataAtendimento: string): boolean {
-        const hoje = moment(new Date()).format('YYYY-MM-DD');
-        
-        return moment(dataAtendimento).isSameOrAfter(hoje);
-    }
+    
+
 
 }
 
