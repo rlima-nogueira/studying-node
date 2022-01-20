@@ -5,7 +5,10 @@ import AtendimentoController from './controllers/AtendimentoController';
 
 const routes = Router();
 
-routes.get('/atendimentos', AtendimentoController.index);
+routes.get('/atendimentos', (req: Request, res: Response) => {
+    AtendimentoController.index(res);
+});
+
 
 routes.post('/atendimentos', (req: Request, res: Response) => {
     const atendimento = req.body;

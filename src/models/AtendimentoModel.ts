@@ -6,7 +6,7 @@ import conexao from '../config/db';
 
 class AtendimentoModel {
     
-    public adiciona(atendimento: Atendimento, resp: Response) {
+    public adiciona(atendimento: Atendimento, resp: Response): Response {
         atendimento.data = moment(atendimento.data, 'DD/MM/YYYY').format('YYYY-MM-DD');
 
         if (!this.isDataValida(atendimento.data)){
@@ -26,6 +26,17 @@ class AtendimentoModel {
         })
     }
 
+    public buscarTodosAtendimentos(resp: Response): void {
+        const sql = `SELECT * FROM Atendimentos`;
+
+        conexao.query(sql, (erro, retorno) => {
+            if (erro) {
+                resp.status(400).json(erro);
+            }
+
+            resp.status(200).json(retorno);
+        });
+    }
 
     private isDataValida(dataAtendimento: string): boolean {
         const hoje = moment(new Date()).format('YYYY-MM-DD');
