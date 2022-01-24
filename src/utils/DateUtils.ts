@@ -3,7 +3,7 @@ import moment from 'moment';
 class DateUtils {
 
     public formatarData(dataAtendimento: string): string {
-        dataAtendimento = moment(dataAtendimento, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        dataAtendimento = moment(dataAtendimento).format('YYYY-MM-DD HH:mm:ss');
         return dataAtendimento;
     }
 

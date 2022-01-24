@@ -4,6 +4,7 @@ export default interface IAtendimento {
     pet?: string;
     servico: string;
     data?: string;
+    dataEditada?: string;
     dataCriacao: string;
     status: string;
     observacoes?: string;

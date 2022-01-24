@@ -8,12 +8,14 @@ class Tabela {
 
     private criarTabelaAtendimentos(): void {
 
+        // const sql = 'drop table Atendimentos'
+
         const sql = `CREATE TABLE IF NOT EXISTS Atendimentos (
                 id INT NOT NULL AUTO_INCREMENT, 
                 cliente VARCHAR(50) NOT NULL, 
                 pet VARCHAR(20),
                 servico VARCHAR(20) NOT NULL, 
-                data date NOT NULL,
+                data datetime NOT NULL,
                 dataCriacao datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 status VARCHAR(50) NOT NULL,
                 observacoes TEXT, 
